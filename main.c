@@ -2,6 +2,7 @@
 
 #include "days/day1.h"
 #include "days/day2.h"
+#include "days/day3.h"
 
 int main() {
     printf("==========================================================\n");
@@ -13,6 +14,9 @@ int main() {
     printf("Day 2:\n");
     printf("    Test: Part 1: %ld | Part 2: %ld\n", day2part1("data/day2test.txt"), day2part2("data/day2test.txt"));
     printf("    Real: Part 1: %ld | Part 2: %ld\n", day2part1("data/day2.txt"), day2part2("data/day2.txt"));
+    printf("Day 3:\n");
+    printf("    Test: Part 1: %ld | Part 2: %ld\n", day3part1("data/day3test.txt"), day3part2("data/day3test.txt"));
+    printf("    Real: Part 1: %ld | Part 2: %ld\n", day3part1("data/day3.txt"), day3part2("data/day3.txt"));
     printf("==========================================================\n");
 
     return 0;
