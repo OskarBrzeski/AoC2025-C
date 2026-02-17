@@ -4,34 +4,31 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../utility.h"
 #include "day4.h"
 
 
-const int64_t d4_MAX_FLOOR_SIZE = 140 * 140;
+const i64 d4_MAX_FLOOR_SIZE = 140 * 140;
 
 
-int64_t day4part1(char *filepath) {
+i64 day4part1(char *filepath) {
 	d4_floor floor = d4_new_floor();
 
 	d4_parse_file(filepath, &floor);
-
-	int64_t rolls = d4_remove_all_rolls(&floor, false);
+	i64 rolls = d4_remove_all_rolls(&floor, false);
 
 	free(floor.floor);
-
 	return rolls;
 }
 
 
-int64_t day4part2(char *filepath) {
+i64 day4part2(char *filepath) {
 	d4_floor floor = d4_new_floor();
 
 	d4_parse_file(filepath, &floor);
-
-	int64_t rolls = d4_remove_all_rolls(&floor, true);
+	i64 rolls = d4_remove_all_rolls(&floor, true);
 
 	free(floor.floor);
-
 	return rolls;
 }
 
@@ -62,11 +59,12 @@ void d4_parse_file(char *filepath, d4_floor *floor) {
 	floor->cols = strlen(floor->floor[0]);
 	
 	free(buffer);
+	fclose(file);
 }
 
 
-int64_t d4_remove_all_rolls(d4_floor *floor, bool recursive) {
-	int64_t total = 0;
+i64 d4_remove_all_rolls(d4_floor *floor, bool recursive) {
+	i64 total = 0;
 	
 	d4_removable removable;
 	do {
@@ -90,9 +88,7 @@ int64_t d4_remove_all_rolls(d4_floor *floor, bool recursive) {
 void d4_get_removable_rolls(d4_floor *floor, d4_removable *removable) {
 	for (int row = 0; row < floor->rows; row++) {
 		for (int col = 0; col < floor->cols; col++) {
-			if (floor->floor[row][col] != '@') {
-				continue;
-			}
+			if (floor->floor[row][col] != '@') continue;
 	
 			if (d4_surrounds(floor, row, col) < 4) {
 				removable->positions[removable->length++] =
@@ -106,23 +102,15 @@ void d4_get_removable_rolls(d4_floor *floor, d4_removable *removable) {
 }
 
 
-int64_t d4_surrounds(d4_floor *floor, int64_t row, int64_t col) {
-	int64_t total = 0;
+i64 d4_surrounds(d4_floor *floor, i64 row, i64 col) {
+	i64 total = 0;
 	for (int i = -1; i < 2; i++) {
 		for (int j = -1; j < 2; j++) {
-			if (row + i < 0 || row + i > floor->rows - 1) {
-				continue;
-			}
-			if (col + j < 0 || col + j > floor->cols - 1) {
-				continue;
-			}
-			if (i == 0 && j == 0) {
-				continue;
-			}
+			if (row + i < 0 || row + i > floor->rows - 1) continue;
+			if (col + j < 0 || col + j > floor->cols - 1) continue;
+			if (i == 0 && j == 0) continue;
 	
-			if (floor->floor[row+i][col+j] == '@') {
-				total++;
-			}
+			if (floor->floor[row+i][col+j] == '@') total++;
 		}
 	}
 	
