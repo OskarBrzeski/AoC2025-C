@@ -1,5 +1,3 @@
-#include <stdint.h>
-
 #include "../utility.h"
 
 typedef struct {
