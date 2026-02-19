@@ -1,5 +1,5 @@
 WARNS = -Wall -Wextra -Werror -Wpedantic
-OBJECTS = day1.o day2.o day3.o day4.o day5.o day6.o utility.o
+OBJECTS = day1.o utility.o day2.o day3.o day4.o day5.o day6.o day7.o
 
 run: main
 	./main
@@ -27,3 +27,6 @@ day6.o: days/day6.c days/day6.h utility.o
 
 utility.o: utility.c utility.h
 	cc -c utility.c ${WARNS}
+
+day7.o: days/day7.c days/day7.h utility.o
+	cc -c days/day7.c ${WARNS}
